@@ -5,7 +5,7 @@
 This file creates ONE reusable DB connection
 */
 
-$conn = new mysqli("192.168.1.142", "root", "yes", "shop");
+$conn = new mysqli("db", "root", "yes", "shop");
 
 /*
 🧠 CONNECTION SAFETY

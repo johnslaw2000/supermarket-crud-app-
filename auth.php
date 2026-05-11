@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$conn = new mysqli("192.168.1.142", "root", "yes", "shop");
+$conn = new mysqli("db", "root", "yes", "shop");
 
 include 'config.php';
 
