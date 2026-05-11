@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  web:
+    image: supermarket-app
+    container_name: supermarket
+    ports:
+      - "8080:80"
+    restart: always
+

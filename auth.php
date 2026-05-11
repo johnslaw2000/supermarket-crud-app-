@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$conn = new mysqli("localhost", "root", "yes", "shop");
+$conn = new mysqli("192.168.1.142", "root", "yes", "shop");
 
 include 'config.php';
 
@@ -26,8 +26,9 @@ if ($result && $result->num_rows == 1) {
 
         $_SESSION['user'] = $username;
 
-        header("Location: index.php");
-        exit();
+ 
+header("Location: http://192.168.1.142:8080/index.php");
+exit();
 
     } else {
         echo "Wrong password";

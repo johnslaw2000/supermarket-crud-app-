@@ -1,3 +1,4 @@
+```php
 <?php
 session_start();
 
@@ -8,25 +9,13 @@ if (!isset($_SESSION['user'])) {
 
 include 'config.php';
 
-/*
-🧠 CHECK PRODUCT ID
-*/
 if (!isset($_GET['id'])) {
     die("No product ID provided");
 }
 
 $id = $_GET['id'];
 
-/*
-🧠 GET PRODUCT FROM DATABASE
-*/
-$sql = "SELECT * FROM products WHERE id = $id";
-
-$result = $conn->query($sql);
-
-if (!$result) {
-    die("Query failed: " . $conn->error);
-}
+$result = $conn->query("SELECT * FROM products WHERE id=$id");
 
 $product = $result->fetch_assoc();
 
@@ -38,67 +27,85 @@ if (!$product) {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Edit Product</title>
+    <title>Edit Product</title>
 
-<style>
-body {
-    font-family: Arial;
-    background: #f4f6f9;
-}
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+        }
 
-.card {
-    width: 400px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
-}
+        .form-box {
+            width: 400px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
 
-.card h2 {
-    text-align: center;
-}
+        .form-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
 
-.card input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-}
+        .form-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background: #3498db;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-</style>
+        .form-box button {
+            width: 100%;
+            padding: 10px;
+            background: #2196F3;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
+        .form-box button:hover {
+            background: #1976D2;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="card">
+<div class="form-box">
 
-<h2>✏ Edit Product</h2>
+    <h2>✏ Edit Product</h2>
 
-<form action="update_product.php" method="POST">
+    <form action="update_product.php" method="POST">
 
-<input type="hidden" name="id"
-value="<?php echo $product['id']; ?>">
+        <input type="hidden" name="id" value="<?= $product['id'] ?>">
 
-<input type="text" name="name"
-value="<?php echo $product['name']; ?>" required>
+        <input
+            type="text"
+            name="name"
+            placeholder="Product Name"
+            value="<?= $product['name'] ?>"
+            required
+        >
 
-<input type="number" step="0.01" name="price"
-value="<?php echo $product['price']; ?>" required>
+        <input
+            type="number"
+            step="0.01"
+            name="price"
+            placeholder="Price"
+            value="<?= $product['price'] ?>"
+            required
+        >
 
-<button type="submit">Update Product</button>
+        <button type="submit">💾 Update Product</button>
 
-</form>
+    </form>
 
 </div>
 
 </body>
 </html>
+```
+
